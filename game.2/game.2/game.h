@@ -13,3 +13,5 @@ void PlayerMove(char Board[ROW][COL], int row, int col);
 void ComputerMove(char Board[ROW][COL], int row, int col);
 //≈–∂œ ‰”Æ
 char Is_Win(char Board[ROW][COL], int row, int col);
+//≈–∂œ∆Â≈Ã «∑Ò¬˙¡À
+char Is_Full(char Board[ROW][COL], int row, int col);

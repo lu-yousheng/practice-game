@@ -48,6 +48,7 @@ void game()
 		DisplayBoard(Board, ROW, COL);
 
 		//≈–∂œ «∑Ò ‰”Æ
+		abc = Is_Win(Board, ROW, COL);
 		if (abc == '#')
 		{
 			printf("µÁƒ‘”Æ¡À\n");
