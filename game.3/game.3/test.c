@@ -23,7 +23,7 @@ void game()
 
 	//²¼ÖÃÀ×
 	SetMine(mine, ROW, COL);
-	DispalyBoard(mine, ROW, COL);
+	//DispalyBoard(mine, ROW, COL);
 
 	//ÅÅ³ıÀ×
 	FindMine(mine, show, ROWS, COLS);

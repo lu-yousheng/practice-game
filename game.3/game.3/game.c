@@ -68,7 +68,7 @@ void FindMine(char mine[ROWS][COLS], char show[ROWS][COLS], int rows, int cols)
 	while (count!=0)
 	{
 		scanf("%d %d", &x, &y);
-		if (x > 0 && x <= ROW && y > 0 && y < COL)
+		if (x > 0 && x <= ROW && y > 0 && y <= COL)
 		{
 			if (mine[x][y] == '1')
 			{
