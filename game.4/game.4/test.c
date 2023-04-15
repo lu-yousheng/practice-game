@@ -45,12 +45,17 @@ int main(void)
 			QUERY_Peo(&con);
 			break;
 		case SORT:
-			SORT_Peo(&con);
+			//SORT_Peo(&con);
+			break;
+		case EXIT:
+			SAVE_CON(&con);
 			break;
 		default:
 			break;
 		}
 
 	} while (input);
+	free(con.data);
+	con.data = NULL;
 	return 0;
 }

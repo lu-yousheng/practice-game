@@ -1,2 +1,4 @@
-﻿test.obj : error LNK2019: 无法解析的外部符号 _SORT_Peo，函数 _main 中引用了该符号
-D:\practice-code\practice-game\game.4\Debug\game.4.exe : fatal error LNK1120: 1 个无法解析的外部命令
+﻿  contact.c
+  test.c
+  正在生成代码...
+  game.4.vcxproj -> D:\practice-code\practice-game\game.4\Debug\game.4.exe

@@ -2,20 +2,108 @@
 #include"contact.h"
 
 //初始化通讯录结构体
+//静态
+//void Init_con(contact* pc)
+//{
+//	pc->sz = 0;
+//	memset(pc->data, 0, sizeof(pc->data));
+//}
+
+void loadcontat(contact* pc)
+{
+	FILE* pf = fopen("contact.dat", "r");
+	if (pf == NULL)
+	{
+		perror("loadcontat");
+		return;
+	}
+	PeoInFo tmp = { 0 };
+	while (fread(&tmp, sizeof(PeoInFo), 1, pf))
+	{
+		//判断增容
+		add_cap(pc);
+		pc->data[pc->sz] = tmp;
+		pc->sz++;
+	}
+	fclose(pf);
+	pf = NULL;
+}
+//初始化通讯录结构体
+//动态版本
 void Init_con(contact* pc)
 {
 	pc->sz = 0;
-	memset(pc->data, 0, sizeof(pc->data));
+	pc->data = (PeoInFo*)malloc(sizeof(PeoInFo) * FIRST);
+	if (pc->data == NULL)
+	{
+		perror("Init_con");
+	}
+	pc->capacity = FIRST;
+	//加载数据函数
+	loadcontat(pc);
+}
+//保存
+void SAVE_CON(contact* pc)
+{
+	FILE* pf = fopen("contact.dat", "w");
+	if (pf == NULL)
+	{
+		perror("SAVE_CON");
+		return;
+	}
+	int i = 0;
+	for (i = 0;i < pc->sz;i++)
+	{
+		fwrite(pc->data, sizeof(PeoInFo), 1, pf);
+	}
+	fclose(pf);
+	pf = NULL;
 }
 
 //增加人员
+//静态
+//void ADD_Peo(contact* pc)
+//{
+//	if (pc->sz == MAX_COUNT)
+//	{
+//		printf("数据已满，不能进行增加！\n");
+//		return;
+//	}
+//	printf("请输入姓名：\n");
+//	scanf("%s", pc->data[pc->sz].name);
+//	printf("请输入性别：\n");
+//	scanf("%s", pc->data[pc->sz].sex);
+//	printf("请输入年龄：\n");
+//	scanf("%d", &(pc->data[pc->sz].age));
+//	printf("请输入电话：\n");
+//	scanf("%s", pc->data[pc->sz].tel);
+//	printf("请输入地址：\n");
+//	scanf("%s", pc->data[pc->sz].addr);
+//	pc->sz++;
+//	printf("添加成功!\n");
+//
+//}
+// 
+// 增容
+void add_cap(contact* pc)
+{
+	PeoInFo* tmp = NULL;
+	if (pc->sz == pc->capacity)
+	{
+		tmp = (PeoInFo*)realloc(pc->data, sizeof(PeoInFo) * (pc->capacity + INCREASE));
+		if (tmp != NULL)
+		{
+			pc->data = tmp;
+			pc->capacity += INCREASE;
+			printf("增容成功！\n");
+		}
+	}
+}
+//增加人员
+//动态
 void ADD_Peo(contact* pc)
 {
-	if (pc->sz == MAX_COUNT)
-	{
-		printf("数据已满，不能进行增加！\n");
-		return;
-	}
+	add_cap(pc);
 	printf("请输入姓名：\n");
 	scanf("%s", pc->data[pc->sz].name);
 	printf("请输入性别：\n");
@@ -30,6 +118,7 @@ void ADD_Peo(contact* pc)
 	printf("添加成功!\n");
 
 }
+
 //查询
 void QUERY_Peo(contact* pc)
 {
